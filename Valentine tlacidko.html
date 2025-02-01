@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #ffe6f2;
+            background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #d63384;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: #ffb3d9;
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button-container {
+            display: flex;
+            gap: 15px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.5s ease, background 0.2s;
+        }
+        #yesButton {
+            background: #ff66b2;
+            color: white;
+        }
+        #yesButton:hover {
+            background: #ff3385;
+            transform: scale(1.1);
+        }
+        #noButton {
+            background: #ff9999;
+            color: white;
+        }
+        #noButton:hover {
+            background: #ff6666;
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">Will you be my Valentine? 💖</h1>
+    <div class="button-container" id="buttonContainer">
+        <button id="yesButton">YES</button>
+        <button id="noButton">NO</button>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById("yesButton");
+        const noButton = document.getElementById("noButton");
+        const buttonContainer = document.getElementById("buttonContainer");
+        const question = document.getElementById("question");
+        
+        const questions = [
+            "Are you sure? 💞",
+            "Really? 💘",
+            "Absolutely? 💓",
+            "You can't resist, right? 💝",
+            "One last chance! 💗",
+            "Think twice! 💕",
+            "Don't break my heart! 💔",
+            "Are you playing hard to get? 😏",
+            "Still saying no? 🤨",
+            "What if I give you chocolate? 🍫"
+        ];
+        let questionIndex = 0;
+        
+        noButton.addEventListener("click", () => {
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.transition = "font-size 0.5s ease, padding 0.5s ease";
+            yesButton.style.fontSize = (currentSize * 1.1) + "px";
+            yesButton.style.padding = (parseFloat(yesButton.style.padding || 10) * 1.1) + "px";
+            
+            questionIndex = (questionIndex + 1) % questions.length;
+            question.textContent = questions[questionIndex];
+            
+            if (currentSize * 1.1 >= 100) { 
+                noButton.classList.add("hidden");
+                question.textContent = "Now you have no choice! 💕";
+            }
+        });
+        
+        yesButton.addEventListener("click", () => {
+            window.location.href = "Valentine Yes.html";
+        });
+    </script>
+</body>
+</html>
